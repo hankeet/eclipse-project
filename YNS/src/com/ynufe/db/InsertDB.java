@@ -1,9 +1,7 @@
 package com.ynufe.db;
 
-import java.beans.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class InsertDB {
@@ -56,7 +54,7 @@ public class InsertDB {
 			System.out.println("执行插入语句成功！！");
 			System.out.println("查询结果如下：");
 			SelectDB selectDB=new SelectDB();//实例化一个SelectDB 
-			selectDB.main(args);//调用SelectDB的main()方法
+			SelectDB.main(args);//调用SelectDB的main()方法
 			
 			
 		} catch (SQLException e) {
