@@ -19,7 +19,10 @@ public class DBUtil {
 	String user="liping";
 	String password="123456";
 	
-	String sql="insert into g005 values (8,'sm',2345,'sm','black','Korea')";
+	String insertSql="insert into g005 values (2,'on7 17',2345,'sm','black','Korea')";
+	String selectSql="select * from g005";
+	String deleteSql="delete from g005 where id =2 ";
+	String updateSql="update g005 set name='good' where id=4";
 	
 //第一个方法，连接
 	public Connection getConn() throws Exception {
@@ -62,7 +65,74 @@ public class DBUtil {
 	}
 	
 //第三个方法，增加
-
+	public void insert() {
+		//加载驱动——创建连接——创建对象——执行语句——输出结果——关闭连接
+		//调用连接方法（解决前两步）
+		try {
+			//conn=getConn();//调用连接方法，既打开数据库的连接
+			stat=conn.createStatement();//创建语句对象
+			stat.executeUpdate(insertSql);//调用stat对象的insert方法
+			rs=stat.executeQuery(selectSql);//调用stat对象的Select方法
+			while (rs.next()) {
+				System.out.println(rs.getInt(1)+"\t"+rs.getString(2)+
+								  "\t"+rs.getFloat(3)+"\t"+rs.getString(4)+
+								  "\t"+rs.getString(5)+"\t"+rs.getString(6)
+								  );
+			}
+			rs.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		getClose();
+	}
+//第四个方法，查询
+	public void select() throws Exception {
+		//conn=getConn();//调用连接方法，既打开数据库的连接
+		stat=conn.createStatement();
+		rs=stat.executeQuery(selectSql);//将查询的结果存入rs
+		while (rs.next()) {
+			System.out.println(rs.getInt(1)+"\t"+rs.getString(2)+
+							  "\t"+rs.getFloat(3)+"\t"+rs.getString(4)+
+							  "\t"+rs.getString(5)+"\t"+rs.getString(6)
+							  );
+		}
+		getClose();
+	}
+	
+	
+	
+//第五个方法，删除
+	
+	
+	public void delete() throws Exception {
+		//conn=getConn();//调用连接方法，既打开数据库的连接
+		stat=conn.createStatement();
+		stat.executeUpdate(deleteSql);
+		rs=stat.executeQuery(selectSql);
+		while (rs.next()) {
+			System.out.println(rs.getInt(1)+"\t"+rs.getString(2)+
+							  "\t"+rs.getFloat(3)+"\t"+rs.getString(4)+
+							  "\t"+rs.getString(5)+"\t"+rs.getString(6)
+							  );
+		}
+		getClose();
+	}
+	
+//第六个方法，更新
+	public void update() throws Exception {
+		//conn=getConn();//调用连接方法，既打开数据库的连接
+		stat=conn.createStatement();
+		stat.executeUpdate(updateSql);
+		rs=stat.executeQuery(selectSql);
+		while (rs.next()) {
+			System.out.println(rs.getInt(1)+"\t"+rs.getString(2)+
+					  "\t"+rs.getFloat(3)+"\t"+rs.getString(4)+
+					  "\t"+rs.getString(5)+"\t"+rs.getString(6)
+					  );
+			
+		}
+		getClose();
+	}
 	
 	
 //通过main()方法，开启程序入口，调用方法
